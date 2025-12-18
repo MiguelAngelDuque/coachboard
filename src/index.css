@@ -89,3 +89,9 @@ textarea{ resize: vertical; }
   cursor:pointer;
   opacity:.9;
 }
+
+.pillBtn{
+  background: white;
+  cursor: pointer;
+}
+
