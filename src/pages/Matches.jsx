@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { uid } from "../lib/store.js"
+import { Link } from "react-router-dom"
 
 const empty = { id: "", opponent: "", date: "", location: "", homeAway: "Casa", callup: [], notes: "" }
 
@@ -118,23 +119,36 @@ export default function Matches({ store, setStore }) {
           </div>
 
           <div className="list" style={{ marginTop: 12 }}>
-            {filtered.map(m => (
-              <div className="item" key={m.id}>
-                <div>
-                  <div className="title">{m.homeAway}: {m.opponent}</div>
-                  <div className="meta">
-                    {m.date ? `📅 ${m.date}` : "📅 sin fecha"}
-                    {m.location ? ` · 📍 ${m.location}` : ""}
-                    {Array.isArray(m.callup) ? ` · 👥 Convocados: ${m.callup.length}` : ""}
-                    {m.notes ? ` · 📝 ${m.notes}` : ""}
+            {filtered.map(m => {
+              const names = (m.callup || [])
+                .map(id => playersById[id])
+                .filter(Boolean)
+
+              const preview = names.slice(0, 2).join(", ")
+              const extra = names.length > 2 ? ` (+${names.length - 2})` : ""
+
+              return (
+                <div className="item" key={m.id}>
+                  <div>
+                    <div className="title">{m.homeAway}: {m.opponent}</div>
+                    <div className="meta">
+                      {m.date ? `📅 ${m.date}` : "📅 sin fecha"}
+                      {m.location ? ` · 📍 ${m.location}` : ""}
+                      {Array.isArray(m.callup) ? ` · 👥 Convocados: ${names.length ? preview + extra : 0}` : ""}
+                      {m.notes ? ` · 📝 ${m.notes}` : ""}
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    {/* Si ya tienes detalle: */}
+                    <Link className="btn ghost" to={`/matches/${m.id}`}>Ver</Link>
+
+                    <button className="btn ghost" type="button" onClick={() => edit(m)}>Editar</button>
+                    <button className="btn ghost" type="button" onClick={() => remove(m.id)}>Borrar</button>
                   </div>
                 </div>
-                <div className="row">
-                  <button className="btn ghost" type="button" onClick={() => edit(m)}>Editar</button>
-                  <button className="btn ghost" type="button" onClick={() => remove(m.id)}>Borrar</button>
-                </div>
-              </div>
-            ))}
+              )
+            })}
             {filtered.length === 0 && <p className="muted">No hay partidos.</p>}
           </div>
         </div>

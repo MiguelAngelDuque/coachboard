@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Players from './pages/Players.jsx'
 import Sessions from './pages/Sessions.jsx'
 import Matches from './pages/Matches.jsx'
+import MatchDetail from './pages/MatchDetail.jsx'
 import { clearUser, getUser } from './lib/auth.js'
 import { defaultStore, loadStore, saveStore } from './lib/store.js'
 import { downloadJson, readJsonFile } from './lib/io.js'
@@ -95,6 +96,8 @@ export default function App() {
         <Route path="/sessions" element={<RequireAuth><Sessions store={store} setStore={setStore} /></RequireAuth>} />
         <Route path="/players" element={<RequireAuth><Players store={store} setStore={setStore} /></RequireAuth>} />
         <Route path="/matches" element={<RequireAuth><Matches store={store} setStore={setStore} /></RequireAuth>} />
+        <Route path="/matches/:id" element={<RequireAuth><MatchDetail store={store} /></RequireAuth>} />
+
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
