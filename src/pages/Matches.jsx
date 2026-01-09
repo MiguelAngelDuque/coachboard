@@ -9,6 +9,8 @@ export default function Matches({ store, setStore }) {
 
   const matches = store.matches || []
   const players = store.players || []
+  const playersById = Object.fromEntries(players.map(p => [p.id, p.name]))
+
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase()

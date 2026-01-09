@@ -1,8 +1,41 @@
-# React + Vite
+# CoachBoard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App web para gestionar un equipo: **jugadores**, **sesiones** (entrenos/partidos) y **partidos con convocatoria**.
+Persistencia en **LocalStorage** + utilidades de **importar/exportar JSON**.
 
-Currently, two official plugins are available:
+## Demo
+https://miguelangelduque.github.io/coachboard/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
+- Login mock (para demo)
+- CRUD de Jugadores
+- CRUD de Sesiones (Entreno / Partido)
+- CRUD de Partidos + Convocatoria (checkbox por jugador)
+- Botones: **Ejemplo / Exportar / Importar**
+- Datos guardados en LocalStorage
+
+## Stack
+- React + Vite
+- React Router
+- LocalStorage
+
+## Captura
+![CoachBoard screenshot](./screenshot.png)
+
+## Ejecutar en local
+```bash
+npm install
+npm run dev
+
+
+### B) Añade la captura
+1) Abre tu demo local, entra en **Partidos**, y mete 2–3 cosas.
+2) **Win + Shift + S** → captura.
+3) Guarda como **`screenshot.png`** en la raíz del repo (misma carpeta que `package.json`).
+
+### C) Commit + push
+```powershell
+git add README.md screenshot.png
+git commit -m "Docs: add README and screenshot"
+git push
+
