@@ -158,7 +158,12 @@ export default function Matches({ store, setStore }) {
                 </div>
               )
             })}
-            {filtered.length === 0 && <p className="muted">No hay partidos.</p>}
+            {sorted.length === 0 && <div className="empty">
+            <div className="emoji">⚽</div>
+            <div className="title">Sin partidos</div>
+            <div className="desc">Añade un partido y marca convocados.</div>
+          </div>
+          }
           </div>
         </div>
       </div>

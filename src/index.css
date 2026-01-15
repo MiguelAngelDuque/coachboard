@@ -143,3 +143,26 @@ body{ background: var(--bg); color: var(--text); }
   .nav-left, .nav-right{ width: 100%; }
   .nav-right{ justify-content: flex-start; }
 }
+
+.empty{
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: rgba(255,255,255,.65);
+  text-align: center;
+}
+
+.empty .emoji{
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.empty .title{
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.empty .desc{
+  color: var(--muted);
+  font-size: 14px;
+}

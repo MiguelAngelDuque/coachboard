@@ -50,7 +50,12 @@ export default function Players({ store, setStore }) {
               </div>
             </div>
           ))}
-          {sorted.length === 0 && <p className="muted">No hay jugadores.</p>}
+          {sorted.length === 0 && <div className="empty">
+                <div className="emoji">👥</div>
+                <div className="title">Sin jugadores</div>
+                <div className="desc">Añade el primero para poder convocar partidos.</div>
+                </div>
+}
         </div>
       </div>
     </div>
