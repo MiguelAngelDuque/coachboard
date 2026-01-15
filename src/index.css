@@ -62,3 +62,41 @@ textarea{ resize: vertical; }
   cursor:pointer;
 }
 .btn.ghost{ box-shadow:none; opacity:.9; }
+
+:root{
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, .68);
+  --border: 1px solid rgba(15, 23, 42, .10);
+  --shadow: 0 10px 30px rgba(15,23,42,.08);
+}
+
+body{ background: var(--bg); color: var(--text); }
+
+.card{
+  background: var(--card);
+  border: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.pill, .btn{
+  border: var(--border);
+  background: rgba(255,255,255,.9);
+}
+
+.btn{
+  font-weight: 700;
+}
+
+.btn.ghost{
+  background: transparent;
+}
+
+.item{
+  background: rgba(255,255,255,.7);
+}
+
+.title{ letter-spacing: .2px; }
+
+.muted, .meta{ color: var(--muted); }
