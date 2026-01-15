@@ -120,3 +120,26 @@ body{ background: var(--bg); color: var(--text); }
 .badge--match{ background: rgba(168,85,247,.12); }
 
 .meta .badge{ margin-right: 6px; }
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-left, .nav-right{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-left{ justify-content: flex-start; }
+.nav-right{ justify-content: flex-end; }
+
+@media (max-width: 720px){
+  .nav-left, .nav-right{ width: 100%; }
+  .nav-right{ justify-content: flex-start; }
+}

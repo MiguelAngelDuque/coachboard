@@ -74,30 +74,30 @@ function resetDemo() {
         <div className="container nav">
           <div className="logo">CoachBoard</div>
 
-          <nav className="links">
+          <div className="nav-left">
             <Link className="pill" to="/">Dashboard</Link>
             <Link className="pill" to="/sessions">Sesiones</Link>
             <Link className="pill" to="/players">Jugadores</Link>
             <Link className="pill" to="/matches">Partidos</Link>
+          </div>
 
+          <div className="nav-right">
             {getUser() ? (
               <>
-                <button className="pill" style={{ cursor: 'pointer' }} onClick={seed}>Ejemplo</button>
-                <button className="pill" style={{ cursor: 'pointer' }} onClick={exportData}>Exportar</button>
-                
-                <button className="pill" style={{ cursor: 'pointer' }} onClick={() => fileRef.current?.click()}>Importar</button>
-                <button className="pill pillBtn" onClick={resetDemo}>Reset</button>
-
+                <button className="pill" type="button" onClick={seed}>Ejemplo</button>
+                <button className="pill" type="button" onClick={exportData}>Exportar</button>
+                <button className="pill" type="button" onClick={() => fileRef.current?.click()}>Importar</button>
                 <input ref={fileRef} type="file" accept="application/json" hidden onChange={importData} />
-
-                <button className="pill" style={{ cursor: 'pointer' }} onClick={logout}>Salir</button>
+                <button className="pill" type="button" onClick={resetDemo}>Reset</button>
+                <button className="pill" type="button" onClick={logout}>Salir</button>
               </>
             ) : (
               <Link className="pill" to="/login">Login</Link>
             )}
-          </nav>
+          </div>
         </div>
       </header>
+
 
       <Routes>
         <Route path="/login" element={<Login />} />
