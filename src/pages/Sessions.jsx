@@ -14,11 +14,28 @@ export default function Sessions({ store, setStore }) {
     return sessions.filter(s => `${s.type} ${s.title} ${s.notes}`.toLowerCase().includes(query))
   }, [sessions, q])
 
+  // ✅ Orden: más recientes primero; los sin fecha al final
+  const sorted = useMemo(() => {
+    return filtered.slice().sort((a, b) => {
+      const ad = a.date || ''
+      const bd = b.date || ''
+      if (!ad && !bd) return 0
+      if (!ad) return 1
+      if (!bd) return -1
+      return bd.localeCompare(ad)
+    })
+  }, [filtered])
+
   function set(key, val) { setForm(prev => ({ ...prev, [key]: val })) }
 
   function submit(e) {
     e.preventDefault()
     const title = form.title.trim()
+    if (form.minutes !== '' && Number(form.minutes) < 0) {
+    alert("Los minutos no pueden ser negativos.")
+    return
+    }
+
     if (!title) return
 
     const payload = {
@@ -88,11 +105,11 @@ export default function Sessions({ store, setStore }) {
 
           <div className="row">
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar..." />
-            <span className="pill">Mostrando: {filtered.length}</span>
+            <span className="pill">Mostrando: {sorted.length}</span>
           </div>
 
           <div className="list" style={{ marginTop: 12 }}>
-            {filtered.map(s => (
+            {sorted.map(s => (
               <div className="item" key={s.id}>
                 <div>
                   <div className="title">{s.type}: {s.title}</div>
@@ -108,7 +125,7 @@ export default function Sessions({ store, setStore }) {
                 </div>
               </div>
             ))}
-            {filtered.length === 0 && <p className="muted">No hay sesiones.</p>}
+            {sorted.length === 0 && <p className="muted">No hay sesiones.</p>}
           </div>
         </div>
       </div>

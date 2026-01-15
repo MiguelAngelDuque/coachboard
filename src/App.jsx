@@ -7,7 +7,7 @@ import Sessions from './pages/Sessions.jsx'
 import Matches from './pages/Matches.jsx'
 import MatchDetail from './pages/MatchDetail.jsx'
 import { clearUser, getUser } from './lib/auth.js'
-import { defaultStore, loadStore, saveStore } from './lib/store.js'
+import { defaultStore, loadStore, saveStore, normalizeStore, STORE_KEY } from './lib/store.js'
 import { downloadJson, readJsonFile } from './lib/io.js'
 
 function RequireAuth({ children }) {
@@ -38,8 +38,18 @@ export default function App() {
   }
 
   function exportData() {
-    downloadJson('coachboard-data.json', store)
-  }
+  const d = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+  downloadJson(`coachboard-${d}.json`, store)
+}
+
+function resetDemo() {
+  const ok = confirm("¿Resetear datos de la app? (Solo borra los datos de CoachBoard en este navegador)")
+  if (!ok) return
+  localStorage.removeItem(STORE_KEY)
+  setStore(defaultStore())
+}
+
+
 
   async function importData(e) {
     const file = e.target.files?.[0]
@@ -50,7 +60,7 @@ export default function App() {
       next.players = Array.isArray(next.players) ? next.players : defaultStore().players
       next.sessions = Array.isArray(next.sessions) ? next.sessions : defaultStore().sessions
       next.matches = Array.isArray(next.matches) ? next.matches : defaultStore().matches
-      setStore(next)
+      setStore(normalizeStore(data))
     } catch {
       alert("No se pudo importar el JSON.")
     } finally {
@@ -74,10 +84,10 @@ export default function App() {
               <>
                 <button className="pill" style={{ cursor: 'pointer' }} onClick={seed}>Ejemplo</button>
                 <button className="pill" style={{ cursor: 'pointer' }} onClick={exportData}>Exportar</button>
+                
+                <button className="pill" style={{ cursor: 'pointer' }} onClick={() => fileRef.current?.click()}>Importar</button>
+                <button className="pill pillBtn" onClick={resetDemo}>Reset</button>
 
-                <button className="pill" style={{ cursor: 'pointer' }} onClick={() => fileRef.current?.click()}>
-                  Importar
-                </button>
                 <input ref={fileRef} type="file" accept="application/json" hidden onChange={importData} />
 
                 <button className="pill" style={{ cursor: 'pointer' }} onClick={logout}>Salir</button>

@@ -33,13 +33,16 @@ export default function Matches({ store, setStore }) {
     const opponent = form.opponent.trim()
     if (!opponent) return
 
+    const uniqueCallup = Array.from(new Set(form.callup || []))
+
+
     const payload = {
       id: form.id || uid(),
       opponent,
       date: form.date,
       location: form.location.trim(),
       homeAway: form.homeAway,
-      callup: form.callup,
+      callup: uniqueCallup,
       notes: form.notes.trim(),
     }
 

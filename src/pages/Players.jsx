@@ -9,9 +9,13 @@ export default function Players({ store, setStore }) {
     e.preventDefault()
     const clean = name.trim()
     if (!clean) return
-    setStore({ ...store, players: [{ id: uid(), name: clean }, ...players] })
-    setName('')
-  }
+
+    const exists = players.some(p => (p.name || '').trim().toLowerCase() === clean.toLowerCase())
+    if (exists) {
+      alert("Ese jugador ya existe.")
+      return
+    }
+
 
   function remove(id) {
     setStore({ ...store, players: players.filter(p => p.id !== id) })
@@ -44,4 +48,5 @@ export default function Players({ store, setStore }) {
       </div>
     </div>
   )
+}
 }
