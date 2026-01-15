@@ -112,7 +112,13 @@ export default function Sessions({ store, setStore }) {
             {sorted.map(s => (
               <div className="item" key={s.id}>
                 <div>
-                  <div className="title">{s.type}: {s.title}</div>
+                  <div className="title">
+                  <span className={`badge ${s.type === 'Partido' ? 'badge--match' : 'badge--training'}`}>
+                    {s.type}
+                  </span>
+                  {s.title}
+                  </div>
+
                   <div className="meta">
                     {s.date ? `📅 ${s.date}` : '📅 sin fecha'}
                     {s.minutes !== '' ? ` · ⏱️ ${s.minutes} min` : ''}

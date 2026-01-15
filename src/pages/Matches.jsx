@@ -133,7 +133,13 @@ export default function Matches({ store, setStore }) {
               return (
                 <div className="item" key={m.id}>
                   <div>
-                    <div className="title">{m.homeAway}: {m.opponent}</div>
+                    <div className="title">
+                    <span className={`badge ${m.homeAway === 'Fuera' ? 'badge--away' : 'badge--home'}`}>
+                      {m.homeAway}
+                    </span>
+                      {m.opponent}
+                    </div>
+
                     <div className="meta">
                       {m.date ? `📅 ${m.date}` : "📅 sin fecha"}
                       {m.location ? ` · 📍 ${m.location}` : ""}

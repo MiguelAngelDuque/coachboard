@@ -100,3 +100,23 @@ body{ background: var(--bg); color: var(--text); }
 .title{ letter-spacing: .2px; }
 
 .muted, .meta{ color: var(--muted); }
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: var(--border);
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(255,255,255,.85);
+}
+
+.badge--home{ background: rgba(34,197,94,.12); }
+.badge--away{ background: rgba(239,68,68,.12); }
+
+.badge--training{ background: rgba(59,130,246,.12); }
+.badge--match{ background: rgba(168,85,247,.12); }
+
+.meta .badge{ margin-right: 6px; }
