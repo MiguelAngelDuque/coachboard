@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { uid } from '../lib/store.js'
 
 export default function Players({ store, setStore }) {
   const [name, setName] = useState('')
   const players = store.players || []
+
+  const sorted = useMemo(() => {
+    return players.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+  }, [players])
 
   function add(e) {
     e.preventDefault()
@@ -12,10 +16,13 @@ export default function Players({ store, setStore }) {
 
     const exists = players.some(p => (p.name || '').trim().toLowerCase() === clean.toLowerCase())
     if (exists) {
-      alert("Ese jugador ya existe.")
+      alert('Ese jugador ya existe.')
       return
     }
 
+    setStore({ ...store, players: [{ id: uid(), name: clean }, ...players] })
+    setName('')
+  }
 
   function remove(id) {
     setStore({ ...store, players: players.filter(p => p.id !== id) })
@@ -32,7 +39,7 @@ export default function Players({ store, setStore }) {
         </form>
 
         <div className="list" style={{ marginTop: 12 }}>
-          {players.map(p => (
+          {sorted.map(p => (
             <div className="item" key={p.id}>
               <div>
                 <div className="title">{p.name}</div>
@@ -43,10 +50,9 @@ export default function Players({ store, setStore }) {
               </div>
             </div>
           ))}
-          {players.length === 0 && <p className="muted">No hay jugadores.</p>}
+          {sorted.length === 0 && <p className="muted">No hay jugadores.</p>}
         </div>
       </div>
     </div>
   )
-}
 }
